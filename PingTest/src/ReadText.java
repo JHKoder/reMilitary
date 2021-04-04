@@ -12,11 +12,11 @@ public class ReadText{
  public static String[] getTextIpList(){
     try{
         File file = 
-            new File("C:\\kang\\chap1\\iplist\\ipList.txt");
+            new File("C:\\kang\\tomcat\\web\\WEB-INF\\iplist\\ipList.txt");
         FileReader filereader = new FileReader(file);
         
         List ary = new ArrayList();
-        int singleCh =0;M
+        int singleCh =0;
         boolean isSingle =false;
         
         int i=0;

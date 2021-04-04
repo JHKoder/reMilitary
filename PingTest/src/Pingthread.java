@@ -43,9 +43,8 @@ public class Pingthread extends Thread{
          DatagramPacket dp;
          
          for(;;){
-           while(inputLine != null){
+           while((inputLine = in.readLine()) != null ){
            
-             inputLine = in.readLine();
              String str = inputLine.split("");
              String strNumber ="";
              
@@ -61,22 +60,22 @@ public class Pingthread extends Thread{
              
              if(strNumber ==""){
                 setPing(0);
-             }
-             setPing(StringToInt(strNumber));
+             }else{
+                setPing(StringToInt(strNumber));
+             }//for -if-else -end
              
              String msg = ""+ping;
              byte[] buf = msg.getBytes();
              
              dp = new DatagramPacket(
-                 buf,
-                 buf.length,
-                 ips,
-                 port+threadnumber
-                 );
+                buf,
+                buf.length,
+                ips,
+                port+threadnumber
+               );
+        
+                 workping.postPing(dp,socket,threadnumber,ping);
                  
-            
-                 workping.postPing(dp,socket,threadnumber);
-            
            
            }//while -end
          
@@ -96,10 +95,10 @@ public class Pingthread extends Thread{
          if(number.length()-1 != i){
            intNumber *=10;
          }
-     }
+     }//for -end
      
      return intNumber;
-  }
+  }// stringToInt -end
   
   public int getIpTimeLen(String ip){
       int count =0;
@@ -107,9 +106,9 @@ public class Pingthread extends Thread{
         if(ip.charAt(i) != '.'){
           count++;
         }
-      }
+      }//for -end 
       
     return count+20; 
-  }
+  }// getIpTimeLen -end
   
 } 

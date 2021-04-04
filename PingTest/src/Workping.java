@@ -7,8 +7,8 @@ public class Workping extends Thread{
 
  private static Pingthread[] pingthread;
  private static int len;
- private static boolean 
  private boolean[] pingboolean;
+ private static int timeoutCount=0;
  
  private static DatagramSocket[] dsArray;
  private static DatagramPacket[] dpArray;
@@ -32,7 +32,17 @@ public class Workping extends Thread{
  	     while(true){
  	     	
  	         if(pingAllCheck() == true){
- 	             postSend();
+ 	             if(ping == 0){
+ 	               timeoutCount++;
+ 	                if(timeoutCount >= len){
+ 	                  postSend();
+ 	                  timeoutCount =0;
+ 	                }
+ 	               
+ 	             }else{
+ 	               postSend();
+ 	             }
+ 	            
  	             break;
  	         }
  	         System.out.println("wait");
