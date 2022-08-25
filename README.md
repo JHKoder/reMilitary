@@ -17,7 +17,7 @@
 </br>
 
 ## 프로그램 동작 방식 
-![pingImage2](https://user-images.githubusercontent.com/105915960/186710993-6f236ca9-8b97-435d-bc81-bbd5bc812791.png)
+![pingtest](https://user-images.githubusercontent.com/105915960/186724509-a7acd017-79df-49bd-a172-fdd5e9bf417a.png)
 
 
 ## 이전에 사용했던 UI
