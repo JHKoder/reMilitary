@@ -18,3 +18,9 @@
 
 ## 프로그램 동작 방식 
 ![pingImage2](https://user-images.githubusercontent.com/105915960/186710993-6f236ca9-8b97-435d-bc81-bbd5bc812791.png)
+
+
+## 이전에 사용했던 UI
+기존에는 서버 연결을 확인할떄 모니터링을 아래 방식으로 했습니다. (대략 30~40 ) </br>
+
+![군IP조회](https://user-images.githubusercontent.com/105915960/186712395-94087687-fa8e-46c0-abf5-bddda8d249f2.png)
