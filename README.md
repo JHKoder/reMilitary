@@ -17,4 +17,4 @@
 </br>
 
 ## 프로그램 동작 방식 
-![image](https://raw.githubusercontent.com/K-kjh/Military/main/pingImage.png)
+![pingImage2](https://user-images.githubusercontent.com/105915960/186710993-6f236ca9-8b97-435d-bc81-bbd5bc812791.png)
