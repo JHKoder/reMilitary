@@ -15,3 +15,6 @@
 한 사이트 에 보기 편하게 만들어 피로감을 덜수있다. 
 </br>
 </br>
+
+## 프로그램 동작 방식 
+![image](https://raw.githubusercontent.com/K-kjh/Military/main/pingImage.png)
