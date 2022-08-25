@@ -1,5 +1,5 @@
 
-<string><h3>[Ping 테스트 프로젝트]</h3></string>
+<string><h3>[실시간 Ping 확인 프로젝트]</h3></string>
 [개발 환경] </br>
 &nbsp; 사용 언어 &nbsp;: java7 ,jsp.javascript </br>
 &nbsp; 서버 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: tomcat4.1 </br>
