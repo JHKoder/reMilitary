@@ -12,15 +12,17 @@ import java.util.Objects;
 
 public class Pingthread extends Thread {
 
-    private Workping workping;
+    private final String postIp;
+    private BufferedReader in;
+    private DatagramSocket socket;
+    private DatagramPacket dp;
+    private Process p;
+
+
     private String ip;
     private int threadnumber = 0;
     private int port = 8800;
-    private final String postIp;
 
-    public void setWorkping(Workping workping) {
-        this.workping = workping;
-    }
 
     public Pingthread(String ip, int threadnumber, String postIp) {
         this.ip = ip;
@@ -30,50 +32,65 @@ public class Pingthread extends Thread {
 
     public void run() {
         try {
-            Process p = getRuntime().exec("ping -t " + ip);
+            p = getRuntime().exec("ping -t " + ip);
+            in = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
-            BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
             String inputLine;
-
             int istart = getIpTimeLen(ip);
 
             InetAddress ips = InetAddress.getByName(postIp);
-            DatagramSocket socket = new DatagramSocket();
-            DatagramPacket dp;
+            socket = new DatagramSocket();
 
-            for (; ; ) {
-                while ((inputLine = in.readLine()) != null) {
+            while ((inputLine = in.readLine()) != null) {
+                int ping = 0;
 
-                    int ping = 0;
+                String time = partGet(istart, inputLine);
 
-                    String time = partGet(istart, inputLine);
-
-                    if (!Objects.equals(time, "")) {
-                        ping = stringToInt(time);
-                    }
-
-                    String msg = "" + ping;
-                    byte[] buf = msg.getBytes();
-
-                    dp = new DatagramPacket(
-                            buf,
-                            buf.length,
-                            ips,
-                            port + threadnumber
-                    );
-
-                    workping.postPing(dp, socket, threadnumber, ping);
-
+                if (!Objects.equals(time, "")) {
+                    ping = stringToInt(time);
                 }
+
+                byte[] buf = ("" + ping).getBytes();
+
+                dp = new DatagramPacket(
+                        buf,
+                        buf.length,
+                        ips,
+                        port + threadnumber
+                );
 
             }
 
-        } catch (IOException e) {
-            System.out.println(e);
         } catch (Exception e) {
-            System.out.println(e);
+            close();
         }
+        close();
+    }
 
+    public DatagramSocket getSocket() {
+        return socket;
+    }
+
+    public DatagramPacket getDp() {
+        return dp;
+    }
+
+    public int getThreadnumber() {
+        return threadnumber;
+    }
+
+
+    public void close() {
+        try {
+            in.close();
+            socket.close();
+        } catch (IOException ignored) {
+
+        }
+    }
+
+    public void processClose() {
+        p.destroy();
     }
 
     private String partGet(int istart, String inputLine) {
