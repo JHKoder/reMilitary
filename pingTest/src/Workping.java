@@ -2,62 +2,48 @@ package src;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Workping extends Thread {
 
-    private static Pingthread[] pingthread;
-    private static int len;
+    private Pingthread[] pingthread;
+    private int len;
     private boolean[] pingboolean;
-    private static int timeoutCount = 0;
 
-    private static DatagramSocket[] dsArray;
-    private static DatagramPacket[] dpArray;
+    private DatagramSocket[] dsArray;
+    private DatagramPacket[] dpArray;
 
     public Workping(Pingthread[] pingthread, int len) {
-        Workping.pingthread = pingthread;
-        Workping.len = len;
+        this.pingthread = pingthread;
+        this.len = len;
 
         pingboolean = new boolean[len];
         dsArray = new DatagramSocket[len];
         dpArray = new DatagramPacket[len];
-
     }
 
-    public synchronized void postPing(DatagramPacket bp, DatagramSocket socket, int threadnumber, int ping) {
-        try {
-            dsArray[threadnumber] = socket;
-            dpArray[threadnumber] = bp;
-            pingboolean[threadnumber] = true;
-
-            if (pingAllCheck()) {
-                if (ping == 0) {
-                    timeoutCount++;
-                    if (timeoutCount >= len) {
-                        postSend();
-                        timeoutCount = 0;
-                    }
-
-                } else {
-                    postSend();
-                }
-
+    public void run() {
+        new Timer().scheduleAtFixedRate(new ScheduleTask(() -> {
+            for (Pingthread ls : pingthread) {
+                select(ls.getDp(), ls.getSocket(), ls.getThreadnumber());
             }
-
-
-        } catch (Exception ignored) {
-        }
-
+            postSend();
+        }), new Date(), 5_000); // 5√  ∏∂¥Ÿ send
     }
 
-    public boolean pingAllCheck() {
 
-        for (int i = 0; i < len; i++) {
-            if (!pingboolean[i]) {
-                return false;
-            }
+    public synchronized void select(DatagramPacket bp, DatagramSocket socket, int threadnumber) {
+        dsArray[threadnumber] = socket;
+        dpArray[threadnumber] = bp;
+        pingboolean[threadnumber] = true;
+    }
+
+    public void shutdown() {
+        for (int i = 0; i < pingthread.length; i++) {
+            pingthread[i].processClose();
         }
-
-        return true;
     }
 
     public void postSend() {
@@ -67,9 +53,22 @@ public class Workping extends Thread {
                 dsArray[i].send(dpArray[i]);
             }
             System.out.println("send-");
+        } catch (Exception ignored) {
+        }
 
-        } catch (Exception e) {
-            System.out.println(e);
+    }
+
+    private static class ScheduleTask extends TimerTask {
+
+        private final Runnable runnable;
+
+        public ScheduleTask(Runnable runnable) {
+            this.runnable = runnable;
+        }
+
+        @Override
+        public void run() {
+            runnable.run();
         }
 
     }

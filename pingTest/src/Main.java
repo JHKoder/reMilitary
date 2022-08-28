@@ -22,9 +22,7 @@ public class Main {
 
         Workping workping = new Workping(pings, ipLen);
 
-        for (int i = 0; i < ipLen; i++) {
-            pings[i].setWorkping(workping);
-        }
+        workping.start();
 
     }
 
