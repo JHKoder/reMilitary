@@ -16,6 +16,21 @@
 </br>
 </br>
 
+### (V.1)
+- 전반적인 코드 개선
+- 컨벤션, 코드 분리, 일급 컬렉션 사용
+
+### (V.2) [현재 개발중]
+[여기까지 tomcat을 따로 설치해야만 가능한 단계]
+- windows cmd 모든 명령어 실핼 가능하도록 추가 
+ 
+### (V.3)
+- spring boot gradle으로 마이그레이션
+- 실시간 화면 전달 방식 udp And Json 고려중...
+
+---
+
+
 ## 프로그램 동작 방식 
 ![핑테스트](https://user-images.githubusercontent.com/105915960/187028697-0736ad17-0152-4b89-908a-bfffdb32f955.png)
 
