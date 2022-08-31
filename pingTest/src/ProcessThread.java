@@ -11,6 +11,8 @@ public class ProcessThread extends Thread {
 
     private final PingEntity pingEntity;
     private BufferedReader in;
+
+    private InetAddress ips;
     private Process p;
 
     private ProcessThread(PingEntity pingEntity) {
@@ -23,37 +25,48 @@ public class ProcessThread extends Thread {
 
     @Override
     public void run() {
-        try {
 
+        connection();
+
+        int istart = pingEntity.getIpTimeLen();
+        byte[] buf;
+
+        String inputLine;
+
+        while ((inputLine = ioReadLine())!=null) {
+
+            String ping = partGet(istart, inputLine);
+
+            buf = ("" + Integer.parseInt(ping))
+                    .getBytes();
+
+            pingEntity.updatePacket(
+                    buf,
+                    buf.length,
+                    ips,
+                    pingEntity.getPort()
+            );
+        }
+
+    }
+
+    private void connection() {
+        try {
             p = getRuntime().exec("ping -t " + pingEntity.getIp());
             in = new BufferedReader(new InputStreamReader(p.getInputStream()));
-
-            InetAddress ips = InetAddress.getByName(pingEntity.getPostIp());
-            int istart = pingEntity.getIpTimeLen();
-
-            String inputLine;
-            byte[] buf;
-
-            while ((inputLine = in.readLine())!=null) {
-
-                String ping = partGet(istart, inputLine);
-
-                buf = ("" + Integer.parseInt(ping))
-                        .getBytes();
-
-                pingEntity.updatePacket(
-                        buf,
-                        buf.length,
-                        ips,
-                        pingEntity.getPort() + pingEntity.getIndex()
-                );
-            }
-
-        } catch (Exception ignored) {
+            ips = InetAddress.getByName(pingEntity.getPostIp());
+        } catch (IOException e) {
             close();
         }
     }
 
+    private String ioReadLine() {
+        try {
+            return in.readLine();
+        } catch (IOException e) {
+            return null;
+        }
+    }
 
     public void close() {
         try {
