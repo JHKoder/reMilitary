@@ -1,36 +1,38 @@
 
-<string><h3>[실시간 Ping 확인 프로젝트]</h3></string>
-[개발 환경] </br>
-&nbsp; 사용 언어 &nbsp;: java7 ,jsp.javascript </br>
-&nbsp; 서버 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: tomcat4.1 </br>
-&nbsp; 개발도구  &nbsp;  : CMD , 메모장 </br>
-<h4>[제작 기간]</h4>
- &nbsp;&nbsp; 2021 3.25 ~ 4.4 (10일) </br>
-<h4>[프로젝트 목표]</h4>
-핑테스트(30~40)를 한 홈페이지에 보기 편하게 구현
+### 내부망 모니터링
+#### 프로젝트 목표
+군 대규모 훈련상황떄 사용될 군 망 모니터링을 만들어</br>
+훈련을 좀더 효율적으로 할수 있도록 도와주는 서비스
 </br>
-</br>
-<h4>[기대효과]</h4>
+#### 기대효과
 기존의 cmd창 한 화면 가득 띄어 보는 불편함을 
 한 사이트 에 보기 편하게 만들어 피로감을 덜수있다. 
 </br>
 </br>
 
-### (V.1)
+### (V.1) - 2021 3.25 ~ 4.4 (10일)
+![Java7](https://img.shields.io/badge/-Java7-yellowgreen)
+![Jsp](https://img.shields.io/badge/-Jsp-blue)
+![JS](https://img.shields.io/badge/-Javascript-green)
+![tomcat](https://img.shields.io/badge/tomcat-4.1-lightgrey)
+![ide](https://img.shields.io/badge/IDE-%EB%A9%94%EB%AA%A8%EC%9E%A5-brightgreen)
+```
 - 전반적인 코드 개선
 - 컨벤션, 코드 분리, 일급 컬렉션 사용
 - 1.7 -> 1.8 으로 자바 업그레이드
-- 
+```
 
-### (V.2) [현재 개발중]
-[여기까지 tomcat을 따로 설치해야만 가능한 단계]
+### (V.2) 
+![Java](https://img.shields.io/badge/Java-red?logo=java) 
+![ide](https://img.shields.io/badge/IDE-Intellij-brightgreen)
+```
 - windows cmd 모든 명령어 입력가능 하도록 변경
- 
-### (V.3)
-- spring boot gradle으로 마이그레이션
-- 실시간 화면 전달 방식 udp And Json 고려중...
+- 시스템 정보 모니터링 할수 있도록 구현 중... 
+```
 
----
+#### (V.3 예상 변경)
+- spring boot gradle으로 마이그레이션 교체 
+- 실시간 화면 전달 방식 udp And Json 고려중...
 
 
 ## 프로그램 동작 방식 
