@@ -45,7 +45,9 @@
 
 #### (V.3 예상 변경점)
 - spring boot 2.7.3 gradle으로 마이그레이션
-- 실시간 화면 전달 방식 udp And Json 고려중...
+
+다른 프로젝트에서 이어서 진행 
+https://github.com/oiNeh/Monitoring 
 
 
 ## 프로그램 동작 방식 (V.1)
