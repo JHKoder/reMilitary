@@ -24,7 +24,7 @@
 
 
 
-### (V.1.1) - 22.8.25 ~ 22.8.31
+### (V.2) - 22.8.25 ~ 22.8.31
 ![Java8](https://img.shields.io/badge/Java-8-yellow)
 ![ide](https://img.shields.io/badge/IDE-Intellij-brightgreen)
 ```
@@ -33,15 +33,6 @@
 - 컨벤션, 코드 분리, 일급 컬렉션 사용
 ```
 
-
-
-### (V.2) - 22.9.1 ~
-![Java8](https://img.shields.io/badge/Java-8-yellow)
-![ide](https://img.shields.io/badge/IDE-Intellij-brightgreen)
-```
-- windows cmd 모든 명령어 입력가능 하도록 변경
-- 시스템 정보 모니터링 할수 있도록 구현 중... 
-```
 
 #### (V.3 예상 변경점)
 - spring boot 2.7.3 gradle으로 마이그레이션
